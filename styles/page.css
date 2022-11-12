@@ -1,0 +1,13 @@
+.block_main{
+    width: 300px;
+    height: 250px;
+    text-align: center;
+    overflow: hidden;
+    background-color: darkgray;
+}
+
+.block_main a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
