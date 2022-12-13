@@ -1,6 +1,6 @@
 {
     "name": "Change Layout VKU Dao Tao Page",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "created by Bui Duc Hieu",
     "manifest_version": 2,
     "icons": {
@@ -8,16 +8,22 @@
     },
     "browser_action": {
         "default_icon": "images/logo.png",
-        "default_popup": "index.html",
+        "default_popup": "popup.html",
         "default_title": "ghetsugiadoi"
+    },
+    "background": {
+        "page": "index.html",
+        "persistent": false
     },
     "permissions": [
         "https://daotao.vku.udn.vn/sv/diem"
     ],
-    "content_scripts": [
-        {
-            "matches": ["https://daotao.vku.udn.vn/sv/diem","https://daotao.vku.udn.vn/sv/khao-sat/cau-hoi-khao-sat/*"],
-            "js": ["scripts/index.js"]
-        }
+    "content_scripts": [{
+        "matches": ["https://daotao.vku.udn.vn/sv/diem", "https://daotao.vku.udn.vn/sv/khao-sat/cau-hoi-khao-sat/*"],
+        "js": ["scripts/index.js"]
+    }],
+    "web_accessible_resources": [
+        "scripts/index.js",
+        "scripts/popup.js"
     ]
 }
