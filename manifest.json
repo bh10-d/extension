@@ -19,7 +19,7 @@
         "https://daotao.vku.udn.vn/sv/diem"
     ],
     "content_scripts": [{
-        "matches": ["https://daotao.vku.udn.vn/sv/diem", "https://daotao.vku.udn.vn/sv/khao-sat/cau-hoi-khao-sat/*"],
+        "matches": ["https://daotao.vku.udn.vn/sv/diem", "https://daotao.vku.udn.vn/sv/khao-sat/cau-hoi-khao-sat/*", "https://daotao.vku.udn.vn/sv/diem?hocphan=*"],
         "js": ["scripts/index.js"]
     }],
     "web_accessible_resources": [

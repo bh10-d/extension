@@ -25,6 +25,8 @@ function on() {
     }
 }
 
+
+
 function off() {
     for (let i = 1; i < check.length; i++) {
         if (check[i].classList.value == '') {
@@ -57,45 +59,51 @@ on();
 
 // them button An diem
 let table = document.getElementsByClassName("x_title");
-for (let i = 0; i < 2; i++) {
-    table[i].innerHTML = `<div><p style="color: #dc3545; cursor: pointer; padding-top: 7px; position: absolute; right: 20px;" class="h_cus_match" data-hcus_match=${i}>Ẩn điểm</p></div>` + table[i].innerHTML;
-}
-
-let content = document.getElementsByClassName("x_content");
-let h_cus_button_match = document.getElementsByClassName('h_cus_match');
-for (let i = 0; i < 2; i++) {
-    content[i].style.display = (localStorage.getItem(`hiddenMatch${i}`) == null) ? "block" : "none";
-    h_cus_button_match[i].innerText = (localStorage.getItem(`hiddenMatch${i}`) != null) ? "Hiện điểm" : "Ẩn điểm";
-    h_cus_button_match[i].addEventListener("click", () => {
-        HiddenMatch(h_cus_button_match[i].dataset.hcus_match);
-    });
-}
-// chuc nang an diem
-function HiddenMatch(index) {
-    if (content[index].style.display == "block") {
-        if (parseInt(index) == 0 || parseInt(index) == 1) {
-            localStorage.setItem(`hiddenMatch${index}`, true);
-            h_cus_button_match[index].innerText = "Hiện điểm";
-            content[index].style.display = "none";
+if(table[1] != undefined){
+    for (let i = 0; i < 2; i++) {
+        table[i].innerHTML = `<div><p style="color: #dc3545; cursor: pointer; padding-top: 7px; position: absolute; right: 20px;" class="h_cus_match" data-hcus_match=${i}>Ẩn điểm</p></div>` + table[i].innerHTML;
+    }
+    
+    let content = document.getElementsByClassName("x_content");
+    let h_cus_button_match = document.getElementsByClassName('h_cus_match');
+    for (let i = 0; i < 2; i++) {
+        content[i].style.display = (localStorage.getItem(`hiddenMatch${i}`) == null) ? "block" : "none";
+        h_cus_button_match[i].innerText = (localStorage.getItem(`hiddenMatch${i}`) != null) ? "Hiện điểm" : "Ẩn điểm";
+        h_cus_button_match[i].addEventListener("click", () => {
+            HiddenMatch(h_cus_button_match[i].dataset.hcus_match);
+        });
+    }
+    // chuc nang an diem
+    function HiddenMatch(index) {
+        if (content[index].style.display == "block") {
+            if (parseInt(index) == 0 || parseInt(index) == 1) {
+                localStorage.setItem(`hiddenMatch${index}`, true);
+                h_cus_button_match[index].innerText = "Hiện điểm";
+                content[index].style.display = "none";
+            }
+        } else {
+            localStorage.removeItem(`hiddenMatch${index}`)
+            content[index].style.display = "block";
+            h_cus_button_match[index].innerText = "Ẩn điểm";
         }
-    } else {
-        localStorage.removeItem(`hiddenMatch${index}`)
-        content[index].style.display = "block";
-        h_cus_button_match[index].innerText = "Ẩn điểm";
     }
 }
 
 
+
 // them button chon
 let test = document.getElementsByClassName("col-md-1 col-sm-1 col-xs-12")
-console.log(test[0].children[1].innerText);
+if(test[0] != undefined){
+//     console.log(test[0])
+// console.log(test[0].children[1].innerText);
+// console.log("test")
 
 // function addButton(){
 
 let text = '';
 for (let i = 0; i < 5; i++) {
     text = test[i].innerText;
-    test[i].children[1].innerHTML = text + `<div style="border: 1px solid #dc3545; text-align: center;"><p style="color: #dc3545; cursor: pointer; padding-top: 7px" class="h_cus" data-hcus=${i}>Chọn</p></div>`
+    test[i].children[1].innerHTML = `<div style="border: 1px solid #dc3545; text-align: center;"><p style="color: #dc3545; cursor: pointer; padding-top: 7px;" class="h_cus" data-hcus=${i}>Chọn</p></div>` + text;
 }
 // }
 // addButton();
@@ -103,8 +111,6 @@ for (let i = 0; i < 5; i++) {
 let h_cus_button = document.getElementsByClassName('h_cus');
 for (let i = 0; i < 5; i++) {
     h_cus_button[i].addEventListener("click", () => {
-        // console.log(h_cus_button[i].dataset.hcus)
-        // console.log("click")
         select(h_cus_button[i].dataset.hcus)
     });
 }
@@ -131,25 +137,19 @@ function select(index) {
             document.getElementById(`${tick[i].id}`).checked = true;
             let parent = document.getElementById(`${tick[i].id}`).parentElement;
             parent.classList.add('checked');
-            // console.log(parent);
-            // console.log("hieu");
         }
     } else {
-        // console.log(pretick);
         for (let i = 0; i < pretick.length; i++) {
             document.getElementById(`${pretick[i].id}`).checked = true;
             let parent = document.getElementById(`${pretick[i].id}`).parentElement;
             parent.classList.remove('checked');
-            // console.log(parent);
-            // console.log("hieu");
         }
         for (let i = 0; i < tick.length; i++) {
             document.getElementById(`${tick[i].id}`).checked = true;
             let parent = document.getElementById(`${tick[i].id}`).parentElement;
             parent.classList.add('checked');
-            // console.log(parent);
-            // console.log("hieu");
         }
     }
     pretick = tick;
+}
 }
