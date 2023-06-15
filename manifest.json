@@ -2,7 +2,7 @@
     "name": "Change Layout VKU Dao Tao Page",
     "version": "0.0.3",
     "description": "created by Bui Duc Hieu",
-    "manifest_version": 2,
+    "manifest_version": 3,
     "icons": {
         "16": "images/logo.png"
     },
