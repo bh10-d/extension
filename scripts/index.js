@@ -25,6 +25,9 @@ function on() {
     }
 }
 
+let note = document.getElementsByClassName("col-md-11 col-sm-11 col-xs-12")
+let prenote = note[0].innerText
+note[0].innerText = prenote + " (Mấy bạn chọn các khuôn mặt nằm trong hình vuông để đánh giá nha)"
 
 
 function off() {
@@ -93,6 +96,7 @@ if(table[1] != undefined){
 
 // them button chon
 let test = document.getElementsByClassName("col-md-1 col-sm-1 col-xs-12")
+// console.log(test)
 if(test[0] != undefined){
 //     console.log(test[0])
 // console.log(test[0].children[1].innerText);
@@ -101,11 +105,24 @@ if(test[0] != undefined){
 // function addButton(){
 
 let text = '';
+
 for (let i = 0; i < 5; i++) {
+    let getImg = 
     text = test[i].innerText;
-    test[i].children[1].innerHTML = `<div style="border: 1px solid #dc3545; text-align: center;"><p style="color: #dc3545; cursor: pointer; padding-top: 7px;" class="h_cus" data-hcus=${i}>Chọn</p></div>` + text;
+    // console.log(test[i].children[1].innerHTML)
+    // test[i].children[1].innerHTML = `<div style="border: 1px solid #dc3545; text-align: center;"><p style="color: #dc3545; cursor: pointer; padding-top: 7px;" class="h_cus" data-hcus=${i}>Chọn</p></div>` + text;
+    // test[i].innerHTML = test[i].children[1].innerHTML = `<div style="border: 1px solid #dc3545; text-align: center;"><p style="color: #dc3545; cursor: pointer; padding-top: 7px;" class="h_cus" data-hcus=${i}><img src="${test[i].childNodes[1].currentSrc}" alt=""></p></div>` + text;
+    test[i].innerHTML =  `<div style="border: 1px solid #dc3545; text-align: center;"><p style="color: #dc3545; cursor: pointer; padding-top: 7px;" class="h_cus" data-hcus=${i}><img src="${test[i].childNodes[1].currentSrc}" alt=""></p></div>` + text;
 }
 // }
+
+
+//them button random
+let button_ran = document.getElementsByClassName("col-md-7 col-sm-7 col-xs-12")
+button_ran[0].innerHTML = `<div style="border: 1px solid #dc3545; text-align: center;"><p style="color: #dc3545; cursor: pointer; padding-top: 7px;" class="h_cus_ran">Chọn Random</p></div>`
+// console.log(button_ran)
+
+
 // addButton();
 
 let h_cus_button = document.getElementsByClassName('h_cus');
@@ -114,6 +131,12 @@ for (let i = 0; i < 5; i++) {
         select(h_cus_button[i].dataset.hcus)
     });
 }
+
+let h_cus_button_ran = document.getElementsByClassName('h_cus_ran');
+h_cus_button_ran[0].addEventListener("click", ()=>{
+    select_random()
+})
+console.log(h_cus_button_ran)
 
 
 // console.log(h_cus_button);
@@ -128,11 +151,11 @@ for (let i = 0; i < 5; i++) {
 //   console.log(tick)
 // }
 
-let pretick = null;
+
 
 function select(index) {
     let tick = document.querySelectorAll(`input[value='${parseInt(index)+1}']`);
-    if (pretick == null) {
+    if (pretick == null || pretick_random == []) {
         for (let i = 0; i < tick.length; i++) {
             document.getElementById(`${tick[i].id}`).checked = true;
             let parent = document.getElementById(`${tick[i].id}`).parentElement;
@@ -144,6 +167,11 @@ function select(index) {
             let parent = document.getElementById(`${pretick[i].id}`).parentElement;
             parent.classList.remove('checked');
         }
+        for(let i = 0; i < pretick_random.length; i++ ){
+            let tick = document.querySelectorAll(`input[value='${parseInt(pretick_random[i])+1}']`);
+            let parent = document.getElementById(`${tick[i].id}`).parentElement;
+            parent.classList.remove('checked');
+        }
         for (let i = 0; i < tick.length; i++) {
             document.getElementById(`${tick[i].id}`).checked = true;
             let parent = document.getElementById(`${tick[i].id}`).parentElement;
@@ -152,4 +180,46 @@ function select(index) {
     }
     pretick = tick;
 }
+}
+
+function num_random(){
+    let gen_array = []
+    let tick = document.querySelectorAll(`input[value='${parseInt(0)+1}']`);
+    for(let i = 0; i < tick.length; i++ ){
+        let number_random = Math.floor(Math.random() * 5);
+        gen_array.push(number_random);
+    }
+    return gen_array
+}
+let pretick = null;
+let pretick_random = [];
+function select_random(){
+    let gen_array = [] = num_random()
+    if(pretick_random == [] || pretick == null) {
+        for(let i = 0; i < gen_array.length; i++ ){
+            let tick = document.querySelectorAll(`input[value='${parseInt(gen_array[i])+1}']`);
+            let parent = document.getElementById(`${tick[i].id}`).parentElement;
+            parent.classList.add('checked');
+        }
+    }else{
+        for (let i = 0; i < pretick.length; i++) {
+            document.getElementById(`${pretick[i].id}`).checked = true;
+            let parent = document.getElementById(`${pretick[i].id}`).parentElement;
+            parent.classList.remove('checked');
+        }
+        for(let i = 0; i < pretick_random.length; i++ ){
+            let tick = document.querySelectorAll(`input[value='${parseInt(pretick_random[i])+1}']`);
+            let parent = document.getElementById(`${tick[i].id}`).parentElement;
+            parent.classList.remove('checked');
+        }
+        for(let i = 0; i < gen_array.length; i++ ){
+            let tick = document.querySelectorAll(`input[value='${parseInt(gen_array[i])+1}']`);
+            let parent = document.getElementById(`${tick[i].id}`).parentElement;
+            parent.classList.add('checked');
+        }
+    }
+
+    pretick_random = gen_array
+    console.log(gen_array)
+    console.log(pretick_random);
 }
