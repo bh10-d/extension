@@ -136,7 +136,7 @@ let h_cus_button_ran = document.getElementsByClassName('h_cus_ran');
 h_cus_button_ran[0].addEventListener("click", ()=>{
     select_random()
 })
-console.log(h_cus_button_ran)
+// console.log(h_cus_button_ran)
 
 
 // console.log(h_cus_button);
@@ -155,12 +155,19 @@ console.log(h_cus_button_ran)
 
 function select(index) {
     let tick = document.querySelectorAll(`input[value='${parseInt(index)+1}']`);
-    if (pretick == null || pretick_random == []) {
+    console.log("dong 158 chay")
+    if (pretick == null) {
+        for(let i = 0; i < pretick_random.length; i++ ){
+            let tick = document.querySelectorAll(`input[value='${parseInt(pretick_random[i])+1}']`);
+            let parent = document.getElementById(`${tick[i].id}`).parentElement;
+            parent.classList.remove('checked');
+        }
         for (let i = 0; i < tick.length; i++) {
             document.getElementById(`${tick[i].id}`).checked = true;
             let parent = document.getElementById(`${tick[i].id}`).parentElement;
             parent.classList.add('checked');
         }
+        console.log("dong 164 chay")
     } else {
         for (let i = 0; i < pretick.length; i++) {
             document.getElementById(`${pretick[i].id}`).checked = true;
@@ -179,6 +186,7 @@ function select(index) {
         }
     }
     pretick = tick;
+    console.log(pretick_random);
 }
 }
 
@@ -201,6 +209,11 @@ function select_random(){
             let parent = document.getElementById(`${tick[i].id}`).parentElement;
             parent.classList.add('checked');
         }
+        // for (let i = 0; i < pretick.length; i++) {
+        //     document.getElementById(`${pretick[i].id}`).checked = true;
+        //     let parent = document.getElementById(`${pretick[i].id}`).parentElement;
+        //     parent.classList.remove('checked');
+        // }
     }else{
         for (let i = 0; i < pretick.length; i++) {
             document.getElementById(`${pretick[i].id}`).checked = true;
