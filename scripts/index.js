@@ -26,8 +26,11 @@ function on() {
 }
 
 let note = document.getElementsByClassName("col-md-11 col-sm-11 col-xs-12")
-let prenote = note[0].innerText
-note[0].innerText = prenote + " (Mấy bạn chọn các khuôn mặt nằm trong hình vuông để đánh giá nha)"
+if(note.length > 0){
+    let prenote = note[0].innerText;
+    console.log(note)
+    note[0].innerText = prenote + " (Mấy bạn chọn các khuôn mặt nằm trong hình vuông để đánh giá nha)"
+}
 
 
 function off() {
@@ -155,7 +158,6 @@ h_cus_button_ran[0].addEventListener("click", ()=>{
 
 function select(index) {
     let tick = document.querySelectorAll(`input[value='${parseInt(index)+1}']`);
-    console.log("dong 158 chay")
     if (pretick == null) {
         for(let i = 0; i < pretick_random.length; i++ ){
             let tick = document.querySelectorAll(`input[value='${parseInt(pretick_random[i])+1}']`);
@@ -167,7 +169,7 @@ function select(index) {
             let parent = document.getElementById(`${tick[i].id}`).parentElement;
             parent.classList.add('checked');
         }
-        console.log("dong 164 chay")
+        // console.log("dong 164 chay")
     } else {
         for (let i = 0; i < pretick.length; i++) {
             document.getElementById(`${pretick[i].id}`).checked = true;
@@ -186,7 +188,7 @@ function select(index) {
         }
     }
     pretick = tick;
-    console.log(pretick_random);
+    // console.log(pretick_random);
 }
 }
 
@@ -199,11 +201,11 @@ function num_random(){
     }
     return gen_array
 }
-let pretick = null;
+let pretick = 0;
 let pretick_random = [];
 function select_random(){
     let gen_array = [] = num_random()
-    if(pretick_random == [] || pretick == null) {
+    if(pretick_random == []) {
         for(let i = 0; i < gen_array.length; i++ ){
             let tick = document.querySelectorAll(`input[value='${parseInt(gen_array[i])+1}']`);
             let parent = document.getElementById(`${tick[i].id}`).parentElement;
@@ -215,15 +217,19 @@ function select_random(){
         //     parent.classList.remove('checked');
         // }
     }else{
-        for (let i = 0; i < pretick.length; i++) {
-            document.getElementById(`${pretick[i].id}`).checked = true;
-            let parent = document.getElementById(`${pretick[i].id}`).parentElement;
-            parent.classList.remove('checked');
+        if(pretick.length > 0){
+            for (let i = 0; i < pretick.length; i++) {
+                document.getElementById(`${pretick[i].id}`).checked = true;
+                let parent = document.getElementById(`${pretick[i].id}`).parentElement;
+                parent.classList.remove('checked');
+            }
         }
         for(let i = 0; i < pretick_random.length; i++ ){
             let tick = document.querySelectorAll(`input[value='${parseInt(pretick_random[i])+1}']`);
             let parent = document.getElementById(`${tick[i].id}`).parentElement;
             parent.classList.remove('checked');
+            // console.log('229')
+            // console.log(tick)
         }
         for(let i = 0; i < gen_array.length; i++ ){
             let tick = document.querySelectorAll(`input[value='${parseInt(gen_array[i])+1}']`);
@@ -233,6 +239,6 @@ function select_random(){
     }
 
     pretick_random = gen_array
-    console.log(gen_array)
-    console.log(pretick_random);
+    // console.log(gen_array)
+    // console.log(pretick_random);
 }
